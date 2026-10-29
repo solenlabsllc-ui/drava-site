@@ -27,7 +27,7 @@ The apps are thin WebView wrappers (one `MainActivity`) that load the live PWA. 
 - **Dependencies:** `androidx.appcompat:appcompat:1.6.1`, plus `com.android.billingclient:billing:8.x` only if the app sells anything. Nothing else.
 - **versionCode** must be higher than anything ever uploaded on ANY track. Check Play Console first; handoff docs go stale (Drava's said 7 when it was 10).
 - **Keystore passwords** live in `C:\Users\camer\.gradle\gradle.properties`, never in `build.gradle.kts` and never in Drive docs. If signing fails with "password incorrect", test candidates with `keytool -list` (quote passwords containing `!`).
-- compileSdk/targetSdk 35, minSdk 24, Java 11. Guard API-30+ calls such as `setDecorFitsSystemWindows` with `Build.VERSION.SDK_INT >= R`.
+- compileSdk/targetSdk **36** (Google blocks updates below the current target API — check Play Console Policy status each year), minSdk 24, Java 11. Guard API-30+ calls such as `setDecorFitsSystemWindows` with `Build.VERSION.SDK_INT >= R`.
 - **WebView must-haves:** `WebViewClient` keeping the app's own domain in-app and opening everything else externally; `WebChromeClient.onShowFileChooser` (otherwise `<input type=file>` silently does nothing); `onCreateWindow` for `target=_blank`/`window.open`; no `window.location.hash=` in the PWA (it reloads the WebView, so use `history.pushState`).
 - Android Studio terminal "Unhandled exception … Dispatchers.UI / read lock" popups are IDE bugs. Clear them and use plain PowerShell.
 
