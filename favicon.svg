@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#060606"/>
+  <!-- Grid lines -->
+  <line x1="0" y1="16" x2="64" y2="16" stroke="#C8862A" stroke-opacity="0.06" stroke-width="0.5"/>
+  <line x1="0" y1="32" x2="64" y2="32" stroke="#C8862A" stroke-opacity="0.06" stroke-width="0.5"/>
+  <line x1="0" y1="48" x2="64" y2="48" stroke="#C8862A" stroke-opacity="0.06" stroke-width="0.5"/>
+  <line x1="16" y1="0" x2="16" y2="64" stroke="#C8862A" stroke-opacity="0.06" stroke-width="0.5"/>
+  <line x1="32" y1="0" x2="32" y2="64" stroke="#C8862A" stroke-opacity="0.06" stroke-width="0.5"/>
+  <line x1="48" y1="0" x2="48" y2="64" stroke="#C8862A" stroke-opacity="0.06" stroke-width="0.5"/>
+  <!-- Glow -->
+  <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+    <stop offset="0%" stop-color="#C8862A" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="#C8862A" stop-opacity="0"/>
+  </radialGradient>
+  <rect width="64" height="64" fill="url(#glow)"/>
+  <!-- Reticle rings -->
+  <circle cx="32" cy="32" r="28" fill="none" stroke="#C8862A" stroke-opacity="0.12" stroke-width="0.8"/>
+  <circle cx="32" cy="32" r="20" fill="none" stroke="#C8862A" stroke-opacity="0.16" stroke-width="0.8"/>
+  <circle cx="32" cy="32" r="12" fill="none" stroke="#C8862A" stroke-opacity="0.22" stroke-width="0.8"/>
+  <!-- Crosshair -->
+  <line x1="4" y1="32" x2="60" y2="32" stroke="#C8862A" stroke-opacity="0.08" stroke-width="0.6"/>
+  <line x1="32" y1="4" x2="32" y2="60" stroke="#C8862A" stroke-opacity="0.08" stroke-width="0.6"/>
+  <!-- Corner brackets -->
+  <path d="M4,4 L14,4 M4,4 L4,14" stroke="#C8862A" stroke-width="1.5" fill="none" stroke-opacity="0.9"/>
+  <path d="M60,4 L50,4 M60,4 L60,14" stroke="#C8862A" stroke-width="1.5" fill="none" stroke-opacity="0.9"/>
+  <path d="M4,60 L14,60 M4,60 L4,50" stroke="#C8862A" stroke-width="1.5" fill="none" stroke-opacity="0.9"/>
+  <path d="M60,60 L50,60 M60,60 L60,50" stroke="#C8862A" stroke-width="1.5" fill="none" stroke-opacity="0.9"/>
+  <!-- D lettermark -->
+  <!-- Vertical bar -->
+  <rect x="16" y="14" width="8" height="36" fill="#C8862A"/>
+  <!-- Curved part -->
+  <path d="M24,14 Q46,14 46,32 Q46,50 24,50 Z" fill="#C8862A"/>
+  <!-- Inner cutout -->
+  <path d="M24,21 Q39,21 39,32 Q39,43 24,43 Z" fill="#060606"/>
+  <!-- Center dot -->
+  <circle cx="32" cy="32" r="2.5" fill="#E8A030"/>
+</svg>
