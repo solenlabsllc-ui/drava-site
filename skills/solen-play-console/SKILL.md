@@ -17,14 +17,15 @@ Developer account: **Solen Labs LLC** (signed in as `solenlabsllc@gmail.com`). A
 1. **Check policy status and existing tracks.** Fix rejected or policy issues in the next build if possible.
 2. **Upload an .aab that contains Play Billing** (see `solen-android-release`) to the track the app already uses (Drava is on **Closed testing**, not Internal).
    Test and release → Testing → <track> → **Create new release** → Upload → release notes → **Next** → review (yellow warnings are OK, red errors are not) → Cameron publishes.
-3. **Only then create products** (Monetize with Play → Products):
+3. **Merchant account (one-time, whole developer account):** if Subscriptions shows "You need to set up a Google Payments merchant account", Cameron must do it (it needs legal, tax and bank info, so Claude can't): Subscriptions → **Set up a merchant account** (or All apps → Setup → **Payments profile**). Organization type, legal name `Solen Labs LLC`, EIN, W-9, business checking account (micro-deposit verify in 2–5 days; products usually unlock before that). Check this FIRST on a new account, before building anything that sells.
+4. **Only then create products** (Monetize with Play → Products):
    - Subscriptions → **Create subscription** → Product ID (permanent) → **Add base plan** (`monthly` 1 month / `yearly` 1 year, Auto-renewing) → **Set prices** (all countries, USD) → **Save** → **Activate**.
    - One-time products (older consoles: "In-app products") → **Create one-time product** → ID, name, description, price → **Activate**.
    - Don't add Play free-trial offers when the app already gives a no-card trial.
-4. **Server verification:** Google Cloud service account with the **Google Play Android Developer API** enabled → JSON key → Play Console (All apps level) **Users and permissions** → invite the SA email → app access → *View financial data* + *Manage orders and subscriptions*. Store the JSON as Supabase secret `GOOGLE_PLAY_SERVICE_ACCOUNT`. It can take hours to start working.
-5. **License testing** (All apps → Setup → License testing) → add Cameron's Gmail → free test purchases.
-6. **App content:** Data safety (Device or other IDs; Purchase history; collected, not shared), Content rating / IARC with the correct app name (Drava's still said "Fovu Date Mode").
-7. **Publishing overview → Send changes for review** (Cameron clicks).
+5. **Server verification:** Google Cloud service account with the **Google Play Android Developer API** enabled → JSON key → Play Console (All apps level) **Users and permissions** → invite the SA email → app access → *View financial data* + *Manage orders and subscriptions*. Store the JSON as Supabase secret `GOOGLE_PLAY_SERVICE_ACCOUNT`. It can take hours to start working.
+6. **License testing** (All apps → Setup → License testing) → add Cameron's Gmail → free test purchases.
+7. **App content:** Data safety (Device or other IDs; Purchase history; collected, not shared), Content rating / IARC with the correct app name (Drava's still said "Fovu Date Mode").
+8. **Publishing overview → Send changes for review** (Cameron clicks).
 
 ## Paywall policy checklist (apps sell digital subscriptions)
 - In the Android app, use **Google Play Billing only**: no Stripe links, no promo-code unlocks (hide them in-app; web may keep them).
