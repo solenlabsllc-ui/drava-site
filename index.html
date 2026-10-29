@@ -1508,10 +1508,10 @@ body.in-app .only-web{display:none!important}
 <div id="paywall">
   <div class="pw-card" style="position:relative">
     <!-- DISMISS BUTTON — required by Google Play policy -->
-    <button id="pw-dismiss" onclick="closePaywall()" style="position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:var(--steel);border:1px solid var(--plate);color:var(--white);font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;touch-action:manipulation" aria-label="Close">✕</button>
+    <button id="pw-dismiss" onclick="closePaywall()" style="position:absolute;top:10px;right:10px;width:44px;height:44px;border-radius:50%;background:var(--white);border:2px solid var(--amber);color:var(--black);font-size:20px;font-weight:700;box-shadow:0 0 0 4px rgba(240,236,230,.12);display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;touch-action:manipulation" aria-label="Close">✕</button>
     <div class="pw-icon">🔒</div>
     <div class="pw-title">Access Restricted</div>
-    <div class="pw-sub">Activate full operative status to continue. Your 72-hour trial has ended — upgrade to maintain field access.</div>
+    <div class="pw-sub">Your free 72-hour trial has ended. Upgrade to keep every module — or close this and keep using the free modules.</div>
     <div class="pw-perks">
       <div class="pw-perk"><span class="pw-perk-icon">💬</span><span>Unlimited AI coaching — every module unlocked</span></div>
       <div class="pw-perk"><span class="pw-perk-icon">🎭</span><span>Unlimited field simulations</span></div>
@@ -1545,7 +1545,7 @@ body.in-app .only-web{display:none!important}
       <div class="redeem-msg" id="pw-code-msg"></div>
     </div>
     <!-- CLEARLY VISIBLE DISMISS — Google Play requires dismiss option -->
-    <button onclick="closePaywall()" style="background:none;border:none;color:var(--dim2);font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;margin-top:4px;margin-bottom:12px;text-decoration:underline;padding:8px">No thanks — continue with limited access</button>
+    <button onclick="closePaywall()" style="display:block;width:100%;background:transparent;border:1px solid var(--grey);border-radius:2px;color:var(--white);font-family:var(--body);font-size:15px;font-weight:500;cursor:pointer;margin:4px 0 12px;padding:13px 10px">No thanks — keep using Drava free</button>
     <div style="font-family:var(--mono);font-size:10px;color:var(--dim);line-height:1.5;margin-top:4px;letter-spacing:.06em;text-transform:uppercase">Drava · Independent · Not affiliated with any researcher or public figure</div>
     <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--plate)">
       <div style="font-family:var(--mono);font-size:11px;color:var(--dim2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Ready for the date? Try</div>
