@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
+        settings.setMediaPlaybackRequiresUserGesture(false);
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
         settings.setSupportMultipleWindows(true);           // so target=_blank / window.open reach onCreateWindow
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
 
     private static boolean isOurs(Uri uri) {
         String host = uri.getHost();
-        return "https".equals(uri.getScheme()) && host != null
+        return ("https".equals(uri.getScheme()) || "http".equals(uri.getScheme())) && host != null
                 && (host.equals("drava.app") || host.endsWith(".drava.app"));
     }
 
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
                     ? new Intent(Intent.ACTION_SENDTO, uri)
                     : new Intent(Intent.ACTION_VIEW, uri);
             startActivity(i);
-        } catch (ActivityNotFoundException ignored) {
+        } catch (Exception ignored) {
         }
     }
 
