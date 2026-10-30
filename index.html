@@ -2556,6 +2556,16 @@ function updateVaultLocks(){
     if(pb) pb.classList.add("show");
     var vu=document.getElementById("vault-upgrade");
     if(vu) vu.style.display="none";
+  }else if(isArchives){
+    // Archives owned: drop the $4.99 tile and turn the box into an Operative upsell
+    var vu2=document.getElementById("vault-upgrade");
+    if(vu2){
+      var at=vu2.querySelector(".vp[onclick=\"buy('archives')\"]");
+      if(at) at.remove();
+      var h=vu2.querySelector("h3"),pp=vu2.querySelector("p");
+      if(h) h.textContent="Archives unlocked ✓";
+      if(pp) pp.textContent="Every Briefing Room lesson is yours. Upgrade to Operative for unlimited AI coaching and all mission modules.";
+    }
   }
 }
 
