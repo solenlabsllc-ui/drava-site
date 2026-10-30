@@ -1679,7 +1679,7 @@ window.onDravaPurchase=async function(p){
 };
 // Web: Stripe Payment Link redirects back with ?checkout={CHECKOUT_SESSION_ID}
 async function handleStripeReturn(){
-  const sid=new URLSearchParams(location.search).get("checkout");
+  const qs=new URLSearchParams(location.search);const sid=qs.get("checkout")||qs.get("session_id");
   if(!sid)return;
   try{history.replaceState({},"",location.pathname);}catch(e){}
   const d=await api("drava-account",{action:"verify_stripe",session_id:sid});
