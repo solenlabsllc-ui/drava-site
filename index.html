@@ -1654,7 +1654,7 @@ function refreshAccessUI(){
   if(document.getElementById("app").style.display==="none")return;
   if(isPro){unlockProUI();return;}
   updateBanner();
-  if(isArchives){const b=document.getElementById("vault-content");if(b){b.innerHTML="";buildVault();}}
+  if(isArchives)updateVaultLocks(); // never clear #vault-content: the lesson cards are static HTML
 }
 
 // ---- buying
@@ -1898,7 +1898,7 @@ function unlockProUI(){
   document.getElementById("pro-btn").style.background="linear-gradient(135deg,#52b788,#2d6a4f)";
   document.getElementById("pro-banner").classList.add("show");
   document.getElementById("vault-upgrade").style.display="none";
-  const box=document.getElementById("vault-content");box.innerHTML="";buildVault();
+  updateVaultLocks(); // keep the static lesson cards; just drop the locks/upsell
 }
 async function redeemCode(){
   const v=document.getElementById("redeem-inp").value.trim();
