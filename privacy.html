@@ -74,7 +74,7 @@ footer{text-align:center;padding:24px;font-family:var(--mono);
 <div class="page">
   <div class="page-tag">Legal Document</div>
   <h1>Privacy Policy</h1>
-  <div class="effective">Effective Date: April 13, 2026 · SolenLabs LLC</div>
+  <div class="effective">Effective Date: October 30, 2026 · SolenLabs LLC</div>
   <div class="rule"></div>
 
   <div class="highlight">
@@ -88,15 +88,17 @@ footer{text-align:center;padding:24px;font-family:var(--mono);
   <h2>2. What We Collect</h2>
   <p><strong>Email address.</strong> When you activate your free trial, you provide your email. We use it to send your access credentials and optional weekly field briefings. You can unsubscribe at any time.</p>
   <p><strong>Your onboarding goal.</strong> When you select your mission objective during onboarding (e.g., "find the right woman," "level up"), we store this alongside your email to personalize communications.</p>
+  <p><strong>Device identifier.</strong> Drava creates a random device ID (in the Android app, an app-specific ID) and stores it with your trial and purchase status. We use it to unlock what you've paid for, restore purchases, and enforce daily usage limits that prevent abuse.</p>
+  <p><strong>Purchase history.</strong> When you subscribe or buy in the Android app, Google Play processes the payment. We receive and store the purchase token, product and expiry date so we can verify the purchase and keep your access active. On the web, Stripe processes payments.</p>
   <p><strong>Usage data.</strong> We may collect anonymous, aggregated data about how features are used (e.g., which tools are most popular). This data cannot be linked back to you.</p>
-  <p><strong>What we do NOT collect:</strong> We do not collect your name, phone number, location, payment card details (payments are handled by Stripe), or the content of your AI coaching conversations.</p>
+  <p><strong>What we do NOT collect:</strong> We do not collect your name, phone number, location or payment card details (payments are handled by Google Play or Stripe), and we do not store the content of your AI coaching conversations — it is processed in real time only (see section 4).</p>
 
   <h2>3. Photos and Images</h2>
-  <p>When you use the <strong>Profile Intel</strong> (photo ranking) or <strong>Identity Check</strong> (verification) features, photos are sent directly to Anthropic's API for analysis and are <strong>not stored</strong> by Drava. Photos are processed in real time and immediately discarded after the analysis response is returned.</p>
+  <p>When you use <strong>Profile Intel</strong> (photo ranking) or share a chat screenshot with the <strong>Text Coach</strong>, photos are sent directly to Anthropic's API for analysis and are <strong>not stored</strong> by Drava. Photos are processed in real time and immediately discarded after the analysis response is returned.</p>
   <p>By using these features, you confirm that you have the right to submit the photos you upload — for example, photos that a person has shared publicly on a dating profile. You agree not to upload private photos obtained without consent.</p>
 
   <h2>4. AI Coaching Conversations</h2>
-  <p>Your coaching conversations are processed by <strong>Anthropic's Claude AI</strong> via a secure server-side proxy. Conversation content is not stored in our database. Anthropic's own privacy policy governs how they handle API requests — your conversations are not used to train Anthropic's models under their standard API agreement.</p>
+  <p>Your coaching conversations — including messages, threads and profile text you paste in — are processed by <strong>Anthropic's Claude AI</strong> via a secure server-side proxy. Conversation content is used only to generate the reply and is not stored in our database. Anthropic's own privacy policy governs how they handle API requests — your conversations are not used to train Anthropic's models under their standard API agreement.</p>
 
   <h2>5. How We Use Your Information</h2>
   <ul>
@@ -109,7 +111,8 @@ footer{text-align:center;padding:24px;font-family:var(--mono);
   <h2>6. Data Sharing</h2>
   <p>We do not sell your personal data. We do not share your data with advertisers. We share data only with:</p>
   <ul>
-    <li><strong>Supabase</strong> — our database provider (stores your email and signup info)</li>
+    <li><strong>Supabase</strong> — our database provider (stores your email, device ID and purchase status)</li>
+    <li><strong>Google Play</strong> — processes in-app purchases in the Android app</li>
     <li><strong>Anthropic</strong> — processes AI coaching requests (does not store conversations)</li>
     <li><strong>Stripe</strong> — processes subscription payments (we never see your card number)</li>
   </ul>

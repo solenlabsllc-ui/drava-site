@@ -1326,8 +1326,9 @@ body.in-app .only-web{display:none!important}
             <div class="vault-prices">
               <div class="vp" onclick="buy('monthly')" style="cursor:pointer"><div class="vp-amt">$9.99</div><div class="vp-per">/month</div></div>
               <div class="vp best" onclick="buy('yearly')" style="cursor:pointer"><div class="vp-amt">$79</div><div class="vp-per">/year</div><div class="vp-save">SAVE 34%</div></div>
-              <div class="vp" onclick="buy('archives')" style="cursor:pointer"><div class="vp-amt">$4.99</div><div class="vp-per">Archives only</div></div>
+              <div class="vp" onclick="buy('archives')" style="cursor:pointer"><div class="vp-amt">$4.99</div><div class="vp-per">Archives · one-time</div></div>
             </div>
+            <p style="font-size:12px;margin:-4px 0 12px">Subscriptions renew automatically until you cancel. Archives is a one-time purchase.</p>
             <button class="big-btn" style="max-width:260px;margin-bottom:4px" onclick="buy('monthly')">Activate Operative Status</button>
             <div class="redeem-section only-web">
               <div class="redeem-lbl">Have an access code?</div>
@@ -1475,6 +1476,14 @@ body.in-app .only-web{display:none!important}
           <div class="card only-app" style="padding:0;overflow:hidden;margin:-6px 0 14px">
             <button class="settings-row" style="width:100%;text-align:left;border:none;cursor:pointer" onclick="restorePurchases()"><span class="sr-icon">↻</span><span class="sr-label">Restore purchases</span><span class="sr-arrow">→</span></button>
             <a href="https://play.google.com/store/account/subscriptions?package=com.solenlabs.drava" target="_blank" class="settings-row" style="border-top:1px solid var(--steel)"><span class="sr-icon">💳</span><span class="sr-label">Manage subscription</span><span class="sr-arrow">→</span></a>
+            <div class="redeem-section" style="margin:0;padding:12px 16px 14px;border-top:1px solid var(--steel)">
+              <div class="redeem-lbl">Have an access code?</div>
+              <div class="redeem-row">
+                <input class="redeem-inp" id="set-redeem-inp" type="text" placeholder="Enter code" maxlength="20" autocomplete="off">
+                <button class="redeem-submit" onclick="redeemCode('set-redeem-inp','set-redeem-msg')">Apply</button>
+              </div>
+              <div class="redeem-msg" id="set-redeem-msg"></div>
+            </div>
           </div>
 
           <!-- Support -->
@@ -1900,9 +1909,9 @@ function unlockProUI(){
   document.getElementById("vault-upgrade").style.display="none";
   updateVaultLocks(); // keep the static lesson cards; just drop the locks/upsell
 }
-async function redeemCode(){
-  const v=document.getElementById("redeem-inp").value.trim();
-  const m=document.getElementById("redeem-msg");
+async function redeemCode(inputId,msgId){
+  const v=document.getElementById(inputId||"redeem-inp").value.trim();
+  const m=document.getElementById(msgId||"redeem-msg");
   if(!v){m.className="redeem-msg err";m.textContent="Please enter a code.";return;}
   m.className="redeem-msg";m.textContent="Checking…";
   const d=await api("drava-account",{action:"redeem",code:v});
@@ -2008,7 +2017,7 @@ function isTrialActive(){
 function showProGate(tool){
   const pw=document.getElementById("paywall");
   pw.querySelector(".pw-title").textContent=tool.icon+" "+tool.full+" is Pro";
-  pw.querySelector(".pw-sub").textContent="This tool is included in Drava Operative. Unlock it now — or use a promo code below.";
+  pw.querySelector(".pw-sub").textContent="This tool is included in Drava Operative. Unlock it now"+(IS_APP?".":" — or use a promo code below.");
   pw.classList.add("show");
   try{history.pushState({overlay:'paywall'},'','#paywall');}catch(e){}
 }
@@ -2742,7 +2751,7 @@ function _renderLesson(idx){
     html+='<div style="text-align:center;padding:40px 16px">';
     html+='<div style="font-size:52px;margin-bottom:20px">&#128274;</div>';
     html+='<div style="font-family:var(--cond);font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:14px">Pro Lesson</div>';
-    html+='<div style="font-size:15px;color:var(--grey);line-height:1.7;margin-bottom:28px;font-style:italic">Unlock with a subscription or promo code.</div>';
+    html+='<div style="font-size:15px;color:var(--grey);line-height:1.7;margin-bottom:28px;font-style:italic">'+(IS_APP?'Unlock with a Drava Operative subscription.':'Unlock with a subscription or promo code.')+'</div>';
     html+='<button id="lsn-plans" class="big-btn" style="max-width:280px;margin-bottom:14px">View Plans &#8594;</button>';
     html+='</div>';
   } else {
