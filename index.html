@@ -1328,7 +1328,7 @@ body.in-app .only-web{display:none!important}
               <div class="vp best" onclick="buy('yearly')" style="cursor:pointer"><div class="vp-amt">$79</div><div class="vp-per">/year</div><div class="vp-save">SAVE 34%</div></div>
               <div class="vp" onclick="buy('archives')" style="cursor:pointer"><div class="vp-amt">$4.99</div><div class="vp-per">Archives · one-time</div></div>
             </div>
-            <p style="font-size:12px;margin:-4px 0 12px">Subscriptions renew automatically until you cancel. Archives is a one-time purchase.</p>
+            <p id="vault-terms" style="font-size:12px;margin:-4px 0 12px">Subscriptions renew automatically until you cancel. Archives is a one-time purchase.</p>
             <button class="big-btn" style="max-width:260px;margin-bottom:4px" onclick="buy('monthly')">Activate Operative Status</button>
             <div class="redeem-section only-web">
               <div class="redeem-lbl">Have an access code?</div>
@@ -1654,6 +1654,8 @@ function applyAccess(d){
   lsSet("fg_pro",isPro?"1":"0");lsSet("fg_archives",isArchives?"1":"0");
   trialStart=d.trial_started_at?Date.parse(d.trial_started_at):null;
   if(trialStart){lsSet("fg_trial",String(trialStart));}else{try{localStorage.removeItem("fg_trial");}catch(e){}}
+  // a paying user still on onboarding (fresh install / cleared data) goes straight in
+  if((isPro||isArchives)&&document.getElementById("app").style.display==="none"){_launch();return;}
   refreshAccessUI();
 }
 async function syncAccess(startTrial){
@@ -1864,7 +1866,10 @@ function _launch(){
   document.getElementById("onboarding").style.display="none";
   document.getElementById("app").style.display="flex";
   document.getElementById("bnav").style.display="block";
-  buildNav();buildDrawer();go("scenario");updateBanner();
+  buildNav();buildDrawer();go("scenario");
+  if(isPro){unlockProUI();return;}
+  updateBanner();
+  if(isArchives)updateVaultLocks();
   if(trialExpired())showPaywall();
 }
 function skipOnboarding(){launchApp();}
@@ -1878,6 +1883,7 @@ function updateBanner(){
   if(isPro){b.style.display="none";return;}
   b.style.display="flex";
   if(isLimited){t.innerHTML='⚡ <strong>Limited access</strong> — activate your 3-day field trial for full ops';return;}
+  if(isArchives&&!trialStart){t.innerHTML='📚 <strong>Archives unlocked</strong> — upgrade to Operative for every module';return;}
   const l=daysLeft();
   if(l<=0){b.style.display="none";showPaywall();return;}
   t.innerHTML='⏳ <strong>'+(l===1?"1 day":l+" days")+'</strong> left in your free trial';
@@ -1886,8 +1892,13 @@ function updateBanner(){
 // ---------------------------------------------------------------
 // PAYWALL
 // ---------------------------------------------------------------
+let _pwDefaults=null;
 function showPaywall(){
-  document.getElementById("paywall").classList.add("show");
+  const pw=document.getElementById("paywall");
+  const t=pw.querySelector(".pw-title"),sub=pw.querySelector(".pw-sub");
+  if(!_pwDefaults)_pwDefaults=[t.textContent,sub.textContent];
+  t.textContent=_pwDefaults[0];sub.textContent=_pwDefaults[1];
+  pw.classList.add("show");
   try{history.pushState({overlay:'paywall'},'','#paywall');}catch(e){}
 }
 async function redeemPwCode(){
@@ -2016,6 +2027,7 @@ function isTrialActive(){
 // Show a pro gate modal when a locked tool is tapped
 function showProGate(tool){
   const pw=document.getElementById("paywall");
+  if(!_pwDefaults)_pwDefaults=[pw.querySelector(".pw-title").textContent,pw.querySelector(".pw-sub").textContent];
   pw.querySelector(".pw-title").textContent=tool.icon+" "+tool.full+" is Pro";
   pw.querySelector(".pw-sub").textContent="This tool is included in Drava Operative. Unlock it now"+(IS_APP?".":" — or use a promo code below.");
   pw.classList.add("show");
@@ -2574,6 +2586,8 @@ function updateVaultLocks(){
       var h=vu2.querySelector("h3"),pp=vu2.querySelector("p");
       if(h) h.textContent="Archives unlocked ✓";
       if(pp) pp.textContent="Every Briefing Room lesson is yours. Upgrade to Operative for unlimited AI coaching and all mission modules.";
+      var vt=document.getElementById("vault-terms");
+      if(vt) vt.textContent="Operative renews automatically until you cancel.";
     }
   }
 }
@@ -2751,7 +2765,7 @@ function _renderLesson(idx){
     html+='<div style="text-align:center;padding:40px 16px">';
     html+='<div style="font-size:52px;margin-bottom:20px">&#128274;</div>';
     html+='<div style="font-family:var(--cond);font-size:22px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:14px">Pro Lesson</div>';
-    html+='<div style="font-size:15px;color:var(--grey);line-height:1.7;margin-bottom:28px;font-style:italic">'+(IS_APP?'Unlock with a Drava Operative subscription.':'Unlock with a subscription or promo code.')+'</div>';
+    html+='<div style="font-size:15px;color:var(--grey);line-height:1.7;margin-bottom:28px;font-style:italic">'+(IS_APP?'Unlock with Drava Operative or the $4.99 Archives.':'Unlock with a subscription or promo code.')+'</div>';
     html+='<button id="lsn-plans" class="big-btn" style="max-width:280px;margin-bottom:14px">View Plans &#8594;</button>';
     html+='</div>';
   } else {
@@ -2969,11 +2983,12 @@ document.addEventListener("DOMContentLoaded",()=>{
   // Redeem enter key
   document.getElementById("redeem-inp").addEventListener("keydown",e=>{if(e.key==="Enter")redeemCode();});
   document.getElementById("pw-code").addEventListener("keydown",e=>{if(e.key==="Enter")redeemPwCode();});
+  document.getElementById("set-redeem-inp").addEventListener("keydown",e=>{if(e.key==="Enter")redeemCode("set-redeem-inp","set-redeem-msg");});
   document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLesson();});
   // Init panels
   initSimulator();initFieldReport();initPhotoRanker();initCatfish();
   // Returning user? Skip onboarding
-  if(trialStart||isPro||isLimited){document.getElementById("onboarding").style.display="none";_launch();}
+  if(trialStart||isPro||isArchives||isLimited){document.getElementById("onboarding").style.display="none";_launch();}
   // Access is decided server-side; refresh it (and pick up Stripe / Play purchases)
   if(IS_APP){document.body.classList.add("in-app");try{DravaAndroid.restorePurchases();}catch(e){}}
   handleStripeReturn();
