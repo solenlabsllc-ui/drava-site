@@ -11,7 +11,14 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#060606">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>DRAVA — Field Guide</title>
+<title>Drava: AI Dating Coach — Field Guide</title>
+<meta name="description" content="Drava is an AI dating coach for men 18+: texting help, practice chats, profile review, date plans and scam checks. Free 72-hour trial, no card needed.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://drava.app/">
+<meta property="og:title" content="Drava: AI Dating Coach">
+<meta property="og:description" content="Texting help, practice chats, profile review and date plans. Free 72-hour trial, no card needed.">
+<meta property="og:image" content="https://drava.app/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=Barlow:ital,wght@0,300;0,400;0,500;1,300&family=Barlow+Condensed:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
@@ -1024,9 +1031,9 @@ body.in-app .only-web{display:none!important}
     <div class="ob-rule"></div>
     <div class="ob-classified">Clearance level: access pending</div>
     <div class="ob-title">Know yourself.<br>Read the room.<br>Command the connection.</div>
-    <div class="ob-desc">Tactical coaching for men who want a real connection. Read signals. Execute with confidence. Complete the mission.</div>
-    <button class="ob-btn" onclick="obNext(2)">Request Access →</button>
-    <button class="ob-ghost" onclick="launchLimited()">Continue with limited access</button>
+    <div class="ob-desc">Your AI dating coach: texting help, practice chats, profile review and date plans — for men who want a real connection. <strong style="color:var(--white);font-style:normal">Free for 72 hours. No card needed.</strong></div>
+    <button class="ob-btn" onclick="obNext(2)">Start free 72-hour trial →</button>
+    <button class="ob-ghost" onclick="launchLimited()" style="font-size:11px;color:var(--dim);padding:9px">Just look around (limited access)</button>
     <div class="ob-fine">Not affiliated with any researcher or public figure · Not a substitute for professional counseling</div>
   </div>
 
@@ -1062,14 +1069,14 @@ body.in-app .only-web{display:none!important}
     <div class="ob-dots"><div class="ob-dot"></div><div class="ob-dot"></div><div class="ob-dot on"></div><div class="ob-dot"></div></div>
     <div class="ob-classified">Activate field access</div>
     <div class="ob-title">72-hour intel clearance</div>
-    <div class="ob-desc">Full access to every module. No credit card. Just your email — we'll send your access credentials and weekly field briefings.</div>
+    <div class="ob-desc">Full access to every module for 72 hours. No credit card — just your email. We may send occasional field briefings; unsubscribe anytime.</div>
     <input class="ob-email-input" id="ob-email" type="email" placeholder="Enter your email to activate" autocomplete="email" oninput="validateEmail()" onfocus="this.style.borderColor='var(--amber-d)'" onblur="this.style.borderColor='var(--plate)'">
     <div id="ob-email-msg" style="font-family:var(--mono);font-size:11px;min-height:14px;text-align:center;letter-spacing:.1em;text-transform:uppercase"></div>
-    <button class="ob-btn" id="ob4-next" style="opacity:.4;pointer-events:none" onclick="startTrial()">Activate Access →</button>
     <div style="display:flex;align-items:flex-start;gap:10px;background:var(--iron);border:1px solid var(--plate);border-radius:2px;padding:13px 14px;text-align:left;cursor:pointer" onclick="toggleTerms(event)">
       <input type="checkbox" id="terms-check" style="width:18px;height:18px;flex-shrink:0;accent-color:var(--amber);cursor:pointer;margin-top:2px" onchange="validateEmail()" onclick="event.stopPropagation()">
       <span style="font-family:var(--mono);font-size:10px;color:var(--dim2);line-height:1.65;letter-spacing:.04em">I agree to the <a href="/terms.html" target="_blank" style="color:var(--amber);text-decoration:none" onclick="event.stopPropagation()">Terms of Service</a> and <a href="/privacy.html" target="_blank" style="color:var(--amber);text-decoration:none" onclick="event.stopPropagation()">Privacy Policy</a>. I'm 18 or older. I understand Drava provides AI coaching only and is not a substitute for professional counseling.</span>
     </div>
+    <button class="ob-btn" id="ob4-next" style="opacity:.4;pointer-events:none" onclick="startTrial()">Activate Access →</button>
     <div style="font-family:var(--mono);font-size:11px;color:var(--dim);text-align:center;line-height:1.7;letter-spacing:.06em">Agree to receive Drava field briefings. Unsubscribe anytime.</div>
     <button class="ob-ghost" onclick="launchLimited()" style="font-size:11px;color:var(--dim);padding:9px">Continue with limited access</button>
   </div>
@@ -1595,6 +1602,8 @@ const TRIAL_DAYS=3;
 const API="https://fnsobnuxhhixynnttuao.supabase.co/functions/v1/";
 const ANON_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZuc29ibnV4aGhpeHlubnR0dWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMjk3MDcsImV4cCI6MjA5MTYwNTcwN30.gR0iNBkpilP9LGULIa2j99JH5bo9gf_ZgmsBhiYFhcg";
 const IS_APP=typeof window.DravaAndroid!=="undefined";
+// first-touch marketing source from links like drava.app/?ref=tiktok (saved with the email signup)
+(function(){try{const r=new URLSearchParams(location.search).get("ref");if(r&&!localStorage.getItem("fg_ref"))localStorage.setItem("fg_ref",r.toLowerCase().replace(/[^a-z0-9_-]/g,"").slice(0,24));}catch(e){}})();
 const STRIPE={monthly:"https://buy.stripe.com/fZu4gAdn1cLffc5drL3wQ0h",yearly:"https://buy.stripe.com/3cI5kEaaPbHb8NHdrL3wQ0i",archives:"https://buy.stripe.com/dRm9AU2In7qVgg9bjD3wQ0j"};
 const PLAY={monthly:["drava_operative","monthly"],yearly:["drava_operative","yearly"],archives:["drava_archives",""]};
 
@@ -1834,6 +1843,7 @@ function startTrial(){
   const email=document.getElementById("ob-email").value.trim();
   if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))return;
   trialStart=Date.now();lsSet("fg_email",email);lsSet("fg_trial",trialStart.toString());
+  isLimited=false;try{localStorage.removeItem("fg_limited");}catch(e){}
   syncAccess(true);
   document.getElementById("ob5-desc").textContent="Access granted. Every module is unlocked for 72 hours. Run a simulation, analyze a thread, or complete the psych evaluation.";
   obNext(5);
@@ -1854,13 +1864,20 @@ async function saveEmailToSupabase(email){
         "Authorization":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZuc29ibnV4aGhpeHlubnR0dWFvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMjk3MDcsImV4cCI6MjA5MTYwNTcwN30.gR0iNBkpilP9LGULIa2j99JH5bo9gf_ZgmsBhiYFhcg",
         "Prefer":"return=minimal"
       },
-      body:JSON.stringify({email,goal,source:IS_APP?"android":"web"})
+      body:JSON.stringify({email,goal,source:(IS_APP?"android":"web")+(lsGet("fg_ref")?":"+lsGet("fg_ref"):"")})
     });
     if(res.ok){console.log("Email saved to Supabase");}
     else{const err=await res.text();console.warn("Supabase insert failed:",err);}
   }catch(e){console.warn("Supabase email save error:",e);}
 }
 function launchLimited(){isLimited=true;lsSet("fg_limited","1");_launch();}
+// limited-access user taps "Start free trial": back to the email step
+function resumeTrialSignup(){
+  document.getElementById("app").style.display="none";
+  document.getElementById("bnav").style.display="none";
+  document.getElementById("onboarding").style.display="";
+  obNext(4);
+}
 function launchApp(){if(!trialStart&&!isPro&&!isLimited){trialStart=Date.now();lsSet("fg_trial",trialStart.toString());syncAccess(true);}_launch();}
 function _launch(){
   document.getElementById("onboarding").style.display="none";
@@ -1882,7 +1899,9 @@ function updateBanner(){
   const t=document.getElementById("trial-txt");
   if(isPro){b.style.display="none";return;}
   b.style.display="flex";
-  if(isLimited){t.innerHTML='⚡ <strong>Limited access</strong> — activate your 3-day field trial for full ops';return;}
+  const ub=b.querySelector(".tb-up");
+  if(isLimited){t.innerHTML='⚡ <strong>Limited access</strong> — start your free 72-hour trial for full ops';ub.textContent="Start free trial";ub.onclick=resumeTrialSignup;return;}
+  ub.textContent="Upgrade";ub.onclick=showPaywall;
   if(isArchives&&!trialStart){t.innerHTML='📚 <strong>Archives unlocked</strong> — upgrade to Operative for every module';return;}
   const l=daysLeft();
   if(l<=0){b.style.display="none";showPaywall();return;}
@@ -1898,6 +1917,7 @@ function showPaywall(){
   const t=pw.querySelector(".pw-title"),sub=pw.querySelector(".pw-sub");
   if(!_pwDefaults)_pwDefaults=[t.textContent,sub.textContent];
   t.textContent=_pwDefaults[0];sub.textContent=_pwDefaults[1];
+  if(trialStart&&!isPro&&daysLeft()>0){const l=daysLeft();t.textContent="Go Operative";sub.textContent="Your free trial is active — "+(l===1?"1 day":l+" days")+" left. Upgrade anytime to keep every module after it ends.";}
   pw.classList.add("show");
   try{history.pushState({overlay:'paywall'},'','#paywall');}catch(e){}
 }
@@ -2840,7 +2860,7 @@ function initSettingsPanel(){
     trialEl.textContent=daysLeft()+' day'+( daysLeft()===1?'':'s')+' remaining in trial';
     trialEl.style.color='var(--amber)';
   } else if(isLimited){
-    trialEl.textContent='Limited access — activate trial for full ops';
+    trialEl.textContent='Limited access — start your free 72-hour trial';
   } else {
     trialEl.textContent='Trial expired — upgrade to continue';
     trialEl.style.color='var(--red)';
